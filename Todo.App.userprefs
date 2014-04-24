@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Todo.Android\TaskListAdapter.cs">
+    <Files>
+      <File FileName="Todo.Android\Resources\values\Strings.xml" Line="5" Column="32" />
+      <File FileName="Todo.Android\MainActivity.cs" Line="24" Column="28" />
+      <File FileName="Todo.Android\TaskListAdapter.cs" Line="8" Column="23" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Todo.Android MonoForAntroid.PreferredDevice="3.7&quot; WVGA (Nexus One)" AndroidDeviceId-Debug="emulator-5554" />
+</Properties>
