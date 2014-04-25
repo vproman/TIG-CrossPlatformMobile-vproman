@@ -7,7 +7,9 @@ using Todo.Common;
 namespace Todo.iOS
 {
 	public partial class Todo_iOSViewController : UIViewController
-	{
+	{			
+		TaskManager taskManager = new TaskManager ();
+
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
@@ -30,12 +32,15 @@ namespace Todo.iOS
 			base.ViewDidLoad ();
 			
 			// Perform any additional setup after loading the view, typically from a nib.
-			var taskManager = new TaskManager ();
+
 
 			addButton.TouchUpInside += (object sender, EventArgs e) => {
-				taskManager.NewTodoItem.Text = newTaskText.Text;
-				taskManager.AddTodoItem ();
-				newTaskText.Text = "";
+				AddNewTask ();
+			};
+				
+			newTaskText.Delegate = new CatchEnterDelegate ();
+			newTaskText.EditingDidEnd += (object sender, EventArgs e) => {
+				AddNewTask ();
 			};
 
 			tableTasks.Source = new TasksTableViewSource (tableTasks, taskManager.TodoItems);
@@ -49,6 +54,13 @@ namespace Todo.iOS
 			} else {
 				return true;
 			}
+		}
+
+		void AddNewTask ()
+		{
+			taskManager.NewTodoItem.Text = newTaskText.Text;
+			taskManager.AddTodoItem ();
+			newTaskText.Text = "";
 		}
 	}
 }

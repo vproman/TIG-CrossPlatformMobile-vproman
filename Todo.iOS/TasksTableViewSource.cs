@@ -45,11 +45,36 @@ namespace Todo.iOS
 			}
 			var task = todos [indexPath.Row];
 			cell.TextLabel.Text = task.Text;
+			cell.Accessory = task.IsCompleted ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
+			cell.TextLabel.TextColor = task.IsCompleted ? UIColor.Green : UIColor.Black;
 
 			return cell;
 		}
 
 		#endregion
+
+		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+		{
+			var newIsCompleted = !todos [indexPath.Row].IsCompleted;
+			todos [indexPath.Row].IsCompleted = newIsCompleted;
+			var cell = tableView.CellAt(indexPath);
+			cell.Accessory = newIsCompleted ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
+			cell.TextLabel.TextColor = newIsCompleted ? UIColor.Green : UIColor.Black;
+		}
+
+		public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
+		{
+			return true;
+		}
+
+		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
+		{
+			if (editingStyle == UITableViewCellEditingStyle.Delete) {
+				todos.RemoveAt (indexPath.Row);
+				tableView.DeleteRows (new NSIndexPath[] { indexPath },
+					UITableViewRowAnimation.Top);
+			}
+		}
 	}
 }
 
